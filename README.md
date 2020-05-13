@@ -1,9 +1,9 @@
-[![GitHub version](https://badge.fury.io/gh/timurxyz%2Fstatefuld.svg)](https://badge.fury.io/gh/timurxyz%2Fstatefuld)
-[![npm version](https://badge.fury.io/js/statefuld.svg)](https://badge.fury.io/js/statefuld)
-
 # statefuld (Stateful dirt daemon)
 
 `statefuld` (stateful dirt daemon, stateful-dee) is a lightweight Angular persistence service 🛄  to make values of data properties of components/classes survive Init/Destroy circles throughout a user session.  
+
+[![GitHub version](https://badge.fury.io/gh/timurxyz%2Fstatefuld.svg)](https://badge.fury.io/gh/timurxyz%2Fstatefuld)
+[![npm version](https://badge.fury.io/js/statefuld.svg)](https://badge.fury.io/js/statefuld)
 
 Typically, the orphan data properties in need of such a persistence are the UI input fields ('dirt') and also states of widgets.  
 Which all from the user's perspective are expected to persist as she filled those fields in or left the controls (opened or closed) while Angular will wash these settings out as the UI moves around.
@@ -282,3 +282,7 @@ import {Statefuld, IStatefuld, statefuld} from 'statefuld';
 ### Credits 
 
 This thing was developed for a project by ProofIT.hu, a deep test automation company
+
+### Changelog
+
+
