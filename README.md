@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/statefuld.svg)](https://badge.fury.io/js/statefuld)
+
 # statefuld (Stateful dirt daemon)
 
 `statefuld` (stateful dirt daemon, stateful-dee) is a lightweight Angular persistence service 🛄  to make values of data properties of components/classes survive Init/Destroy circles throughout a user session.  
