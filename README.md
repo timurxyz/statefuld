@@ -1,3 +1,4 @@
+[![GitHub version](https://badge.fury.io/gh/timurxyz%2Fstatefuld.svg)](https://badge.fury.io/gh/timurxyz%2Fstatefuld)
 [![npm version](https://badge.fury.io/js/statefuld.svg)](https://badge.fury.io/js/statefuld)
 
 # statefuld (Stateful dirt daemon)
