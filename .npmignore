@@ -1,0 +1,14 @@
+tsconfig.*.json
+tsconfig.json
+tslint.json
+yarn.lock
+.vscode/
+.nyc_output/
+node_modules/
+src/
+build/
+temp/
+test/
+coverage/
+
+backlog.txt
