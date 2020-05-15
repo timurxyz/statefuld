@@ -79,7 +79,7 @@ function FnStatefuldMixin<S extends ConstructorToExtend>(
     // statefuldKey: string;
 
     // a watchdog to warn if the Init/Destroy order doesn't work as expected, very unlikely
-    private __chkNgLifecycle_iSodZqRKwO = 0;
+    __chkNgLifecycle_iSodZqRKwO = 0; // TODO: make it private when packaging will allow
 
     // see statefuld.stash in the service
     statefuldStash(): boolean {
