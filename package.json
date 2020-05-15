@@ -7,14 +7,15 @@
   "license": "MIT",
   "$schema": "../node_modules/ng-packagr/package.schema.json",
   "peerDependencies": {
-    "@angular/common": "^5.1.0",
-    "@angular/core": "^5.1.0"
+    "@angular/common": "~9.1.6",
+    "@angular/core": "~9.1.6"
   },
   "ngPackage": {
     "lib": {
       "entryFile": "src/public_api.ts"
     },
-    "dest": "./dist/statefuld"
+    "dest": "./dist/statefuld",
+    "whitelistedNonPeerDependencies": ["."]
   },
   "dependencies": {
     "@angular/common": "~9.1.6",
