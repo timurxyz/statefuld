@@ -7,37 +7,42 @@
   "license": "MIT",
   "$schema": "../node_modules/ng-packagr/package.schema.json",
   "peerDependencies": {
-    "@angular/common": "~9.1.6",
-    "@angular/core": "~9.1.6"
+    "@angular/common": "^8.0.0 || ^9.0.0",
+    "@angular/core": "^8.0.0 || ^9.0.0"
   },
   "ngPackage": {
     "lib": {
       "entryFile": "src/public_api.ts"
     },
     "dest": "./dist/statefuld",
-    "whitelistedNonPeerDependencies": ["."]
+    "whitelistedNonPeerDependencies": [
+      "."
+    ]
   },
   "dependencies": {
-    "@angular/common": "~9.1.6",
-    "@angular/compiler": "~9.1.6",
-    "@angular/core": "~9.1.6",
-    "@angular/platform-browser": "~9.1.6",
-    "@angular/platform-browser-dynamic": "~9.1.6",
-    "@angular/router": "~9.1.6",
-    "rxjs": "~6.5.4",
+    "@angular/common": "^8.0.0 || ^9.0.0",
+    "@angular/core": "^8.0.0 || ^9.0.0",
+    "@angular/platform-browser": "^8.0.0 || ^9.0.0",
+    "@angular/platform-browser-dynamic": "^8.0.0 || ^9.0.0",
+    "@angular/router": "^8.0.0 || ^9.0.0",
+    "rxjs": "^6.5.0",
     "tslib": "^1.10.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "^0.9.0"
   },
   "devDependencies": {
-    "@angular/cli": "^9.1.6",
-    "@angular/compiler-cli": "^9.1.7",
+    "typescript": "^3.4.3",
+    "ng-packagr": "^9.1.3",
+    "@angular/cli": "^9.0.0",
+    "@angular/compiler": "^9.0.0",
+    "@angular/compiler-cli": "^9.0.0",
+    "@angular/platform-browser": "^9.0.0",
+    "@angular/platform-browser-dynamic": "^9.0.0",
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
-    "eslint": "^7.0.0",
-    "ng-packagr": "^9.1.3",
-    "ts-node": "~8.3.0",
-    "typescript": "^3.8.3"
+    "eslint": "^6.0.0",
+    "ts-node": "^8.0.0",
+    "zone.js": "^0.10.0"
   },
   "scripts": {
     "build:lib": "ng-packagr -p package.json"
