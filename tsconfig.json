@@ -1,6 +1,8 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
@@ -12,9 +14,14 @@
     "lib": [
       "es2018",
       "dom"
-    ],
+    ]
   },
-  "include": [
-    "./src/**/*"
-  ]  
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
+    "baseUrl": ".",
+    "paths": {
+      "statefuld": ["statefuld"]
+    }
+  }
 }

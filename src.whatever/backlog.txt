@@ -1,0 +1,45 @@
+
+
+// #Property decorator
+export function StatefuldProp( target: any, propertyKey: string): void {
+
+  // statefulDirt.addMember( target.constructor.name, propertyKey);
+  // console.log('***target:', target.constructor.name, 'key:', propertyKey);
+  return;
+}
+
+// etc
+import 'reflect-metadata';
+
+
+// #service
+
+
+// find
+// let key: string|number;
+// if (objKey === undefined ) {
+//   if ('id' in obj) {
+//     key = ( obj as unknown as { id: string|number}).id;
+//   }
+//   else {
+//     return false;
+//   }
+// } else {
+//   key = objKey;
+// }
+
+
+// if (!( typeof propsPattern === 'object' ?
+//         (propsPattern as Set<string> |Map<string|number, any>).size :
+//         (propsPattern as Array<string>).length)) {
+//   return false;
+// }
+
+
+// addClassLazy( className: string) {
+//   if (! this.storage.classes.has(className)) {
+//     this.storage.classes.set(className, new Map< string|number, any>() as ClassNode);
+//   }
+// }
+
+// this.__stateCacheId = 'staticId'; // Math.round(Math.random() * 10000000).toString(16);

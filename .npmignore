@@ -10,5 +10,7 @@ build/
 temp/
 test/
 coverage/
-
+*.zip
+*.tgz
+*.7z
 backlog.txt
