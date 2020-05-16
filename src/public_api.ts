@@ -1,2 +1,2 @@
-export {statefuld, FnGetSourceInstanceByKey} from './statefuld.service';
-export {Statefuld, StatefuldClass, StatefuldConfig, IStatefuld} from './statefuld';
+export {statefuld, FnGetSourceInstanceByKey} from './lib/statefuld';
+export {Statefuld, StatefuldClass, StatefuldConfig, IStatefuld} from './lib/statefuld';
