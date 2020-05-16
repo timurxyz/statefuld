@@ -11,6 +11,8 @@ build/
 temp/
 test/
 coverage/
+.github
+.git
 *.zip
 *.tgz
 *.7z
