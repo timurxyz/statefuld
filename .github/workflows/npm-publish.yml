@@ -1,11 +1,11 @@
 name: npm-publish
 
 on:
-#  release:
-#    types: [registry_package]
-  push:
-    branches:
-      - master
+  registry_package:
+    types: [published]
+#  push:
+#    branches:
+#      - master
 
 jobs:
   build:
@@ -19,7 +19,7 @@ jobs:
       - run: yarn install
       # hack for the current versions problem
       - run: yarn add typescript@'<3.9.0' 
-      - run: sed -i 's:@timurxyz/statefuld:statefuld:' src/package.json
+      - run: sed -i 's:@timurxyz/statefuld:statefuld:' ./src.statefuld/package.json
       - run: yarn build:npmjs
       - run: yarn publish:npmjs
         env:
