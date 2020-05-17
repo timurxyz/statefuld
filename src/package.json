@@ -10,7 +10,7 @@
         "lib": {
             "entryFile": "public_api.ts"
         },
-        "assets": [ "README.md" ],
+        "assets": [ "../README.md" ],
         "dest": "./dist",
         "whitelistedNonPeerDependencies": [
             "."
