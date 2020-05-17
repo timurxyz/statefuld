@@ -34,7 +34,9 @@ type Store = Map< string, ClassNode>; // set (map) of classes, [id, node]
 @Injectable({
   providedIn: 'root',
 })
-// Pseudo class which is the actual singleton instance of the statefuld registry
+/**
+ * Pseudo class which is the actual singleton instance of the statefuld registry
+ */ 
 // tslint:disable-next-line:class-name
 export class statefuld {
 
