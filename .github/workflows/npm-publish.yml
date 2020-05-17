@@ -2,7 +2,7 @@ name: npm-publish
 
 on:
   registry_package:
-    types: [published]
+    types: [published, updated]
 #  push:
 #    branches:
 #      - master
