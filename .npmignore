@@ -16,4 +16,5 @@ coverage/
 *.zip
 *.tgz
 *.7z
+angular.json
 backlog.txt
