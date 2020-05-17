@@ -19,7 +19,7 @@ jobs:
       - run: export NPM_CONFIG_SCOPE=""
       - run: npm install
       - run: npm install typescript@'<3.9.0' 
-      - run: sed -i "" "s:@timurxyz/statefuld:statefuld:" src/package.json
+      - run: sed -i 's:@timurxyz/statefuld:statefuld:' src/package.json
       - run: npm run build:lib
       - run: npm publish src/dist --access public
         env:
