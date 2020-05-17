@@ -32,8 +32,8 @@
   },
   "scripts": {
     "build:github": "env NPM_CONFIG_REGISTRY='https://npm.pkg.github.com/@timurxyz' ng-packagr -p ./src.statefuld/package.json",
-    "build:npmjs": "ng-packagr -p ./src.statefuld/package.json",
+    "build:npmjs": "env NPM_CONFIG_REGISTRY='https://registry.npmjs.org' ng-packagr -p ./src.statefuld/package.json",
     "publish:github": "env NPM_CONFIG_REGISTRY='https://npm.pkg.github.com/@timurxyz' npm publish ./src.statefuld/dist --access public",
-    "publish:npmjs": "npm publish ./src.statefuld/dist --access public"
+    "publish:npmjs": "env NPM_CONFIG_REGISTRY='https://registry.npmjs.org' npm publish ./src.statefuld/dist --access public"
   }
 }
