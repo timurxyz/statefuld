@@ -1,11 +1,11 @@
 name: npm-publish
 
 on:
-#  release:
-#    types: [registry_package]
-  push:
-    branches:
-      - master
+  release:
+    types: [registry_package]
+#  push:
+#    branches:
+#      - master
 
 jobs:
   build:
