@@ -248,23 +248,25 @@ In case the instances are uniquely defined in templates, then use the `statefuld
 
 If the automatism provided with the decorator or the base class is sufficient and you go deno way then (almost, but the .ts extension):
 ```ts
-import {Statefuld, IStatefuld} from 'statefuld/statefuld';
+import {Statefuld, IStatefuld} from 'statefuld';
 // or
-import {StatefuldClass} from 'statefuld/statefuld';
+import {StatefuldClass} from 'statefuld';
 
 // or may you need raw calls in addition then:
-import {Statefuld, statefuld, IStatefuld} from 'statefuld/statefuld';
+import {Statefuld, statefuld, IStatefuld} from 'statefuld';
 ```
 
 May you go the manual control way only:
 ```ts
-import {statefuld} from 'statefuld/statefuld.service';
+import {statefuld} from 'statefuld.service';
 ```
 
 Or the all-in classic Node way (statefuld being the module):
 ```ts
 import {Statefuld, IStatefuld, statefuld} from 'statefuld';
 ```
+
+[![social image](https://raw.githubusercontent.com/timurxyz/statefuld/master/assets/alexander-schimmeck-BM1kLtpAHRA-unsplash.crop.jpg)](https://github.com/timurxyz/statefuld)
 
 ### Roadmap
 
