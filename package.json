@@ -31,9 +31,9 @@
     "zone.js": ">=0.10.0"
   },
   "scripts": {
-    "build:github": "env NPM_CONFIG_REGISTRY='https://npm.pkg.github.com/@timurxyz' ng-packagr -p ./src/package.json",
-    "build:npmjs": "ng-packagr -p ./src/package.json",
-    "publish:github": "env NPM_CONFIG_REGISTRY='https://npm.pkg.github.com/@timurxyz' npm publish src/dist --access public",
-    "publish:npmjs": "npm publish src/dist --access public"
+    "build:github": "env NPM_CONFIG_REGISTRY='https://npm.pkg.github.com/@timurxyz' ng-packagr -p ./src.statefuld/package.json",
+    "build:npmjs": "ng-packagr -p ./src.statefuld/package.json",
+    "publish:github": "env NPM_CONFIG_REGISTRY='https://npm.pkg.github.com/@timurxyz' npm publish ./src.statefuld/dist --access public",
+    "publish:npmjs": "npm publish ./src.statefuld/dist --access public"
   }
 }

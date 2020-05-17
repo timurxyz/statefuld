@@ -47,5 +47,6 @@ package-lock.json
 Thumbs.db
 
 #x
-/src/dist
+/src.statefuld/dist
 yarn.lock
+/src.statefuld/README.md
