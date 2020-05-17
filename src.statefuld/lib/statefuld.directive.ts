@@ -1,20 +1,18 @@
-import {Directive, ElementRef, Renderer2, OnInit} from '@angular/core';
+import {Directive, NgModule, OnInit} from '@angular/core';
 
 // WIP, work in progress
+
 
 @Directive({
   selector: '[appStatefuld]'
 })
-// @NgModule({
-//   declarations: [StatefuldDirective],
-//   exports: [StatefuldDirective]
-// })
 // Statefuld service as directive TODO [not yet implemented]
 export class StatefuldDirective implements OnInit {
 
   constructor(
-    private renderer: Renderer2,
-    private el: ElementRef)
+  //  private renderer: Renderer2,
+  //  private el: ElementRef
+  )
   {}
 
   ngOnInit() {
@@ -22,3 +20,11 @@ export class StatefuldDirective implements OnInit {
     // this.renderer.setProperty( this.el.nativeElement, 'value', 'XOX');
   }
 }
+
+
+@NgModule({
+  declarations: [StatefuldDirective],
+  exports: [StatefuldDirective]
+})
+// Statefuld directive is not yet implemented
+export class StatefuldDirectiveModule {}
