@@ -19,10 +19,10 @@ jobs:
           node-version: 14.x
           registry-url: https://registry.npmjs.org/
       - run: yarn install
-      # hack for the current versions problem
+      # hack for the current version's problem
       - run: yarn add typescript@'<3.9.0' 
       - run: sed -i 's:@timurxyz/statefuld:statefuld:' ./src.statefuld/package.json
       - run: yarn build:npmjs
-      - run: yarn publish:npmjs
+      - run: npm publish ./src.statefuld/dist --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
