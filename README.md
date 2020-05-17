@@ -281,7 +281,8 @@ import {Statefuld, IStatefuld, statefuld} from 'statefuld';
 
 ### Credits 
 
-This thing was developed for a project by ProofIT.hu, a deep test automation company
+* This thing was developed for a project by ProofIT.hu, a deep test automation company
+* Photo by Alexander Schimmeck on Unsplash
 
 ### Changelog
 
