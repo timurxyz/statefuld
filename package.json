@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "description": "statefuld (stateful dirt daemon, stateful-dee) is a lightweight Angular persistence service  to make values of data properties of components/classes survive Init/Destroy circles throughout a user session",
   "repository": "git@github.com:timurxyz/statefuld.git",
-  "registry": "https://npm.pkg.github.com/timurxyz",
   "author": "timur x <x@secdev.eu>",
   "license": "MIT",
   "dependencies": {
@@ -17,8 +16,6 @@
     "zone.js": ">=0.9.0"
   },
   "devDependencies": {
-    "typescript": ">=3.4",
-    "ng-packagr": ">=9",
     "@angular/cli": ">=9",
     "@angular/compiler": ">=9",
     "@angular/compiler-cli": ">=9",
@@ -28,10 +25,15 @@
     "@typescript-eslint/eslint-plugin": ">2.30.0",
     "@typescript-eslint/parser": ">2.30.0",
     "eslint": ">6.0.0",
+    "ng-packagr": ">=9",
     "ts-node": ">=8 || >=9",
+    "typescript": "<3.9.0",
     "zone.js": ">=0.10.0"
   },
   "scripts": {
-    "build:lib": "ng-packagr -p ./src/package.json"
+    "build:github": "env NPM_CONFIG_REGISTRY='https://npm.pkg.github.com/@timurxyz' ng-packagr -p ./src/package.json",
+    "build:npmjs": "ng-packagr -p ./src/package.json",
+    "publish:github": "env NPM_CONFIG_REGISTRY='https://npm.pkg.github.com/@timurxyz' npm publish src/dist --access public",
+    "publish:npmjs": "npm publish src/dist --access public"
   }
 }

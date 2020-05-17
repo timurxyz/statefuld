@@ -1,6 +1,6 @@
 {
     "name": "statefuld",
-    "version": "0.9.3-ak",
+    "version": "0.9.3-al",
     "description": "statefuld (stateful dirt daemon, stateful-dee) is a lightweight Angular persistence service  to make values of data properties of components/classes survive Init/Destroy circles throughout a user session",
     "repository": "git@github.com:timurxyz/statefuld.git",
     "author": "timur x <x@secdev.eu>",
@@ -10,6 +10,9 @@
         "lib": {
             "entryFile": "public_api.ts"
         },
+        "assets": [
+            "README.md"
+          ],
         "dest": "./dist",
         "whitelistedNonPeerDependencies": [
             "."

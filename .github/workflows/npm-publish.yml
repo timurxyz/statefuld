@@ -16,12 +16,10 @@ jobs:
         with:
           node-version: 14.x
           registry-url: https://registry.npmjs.org/
-      - run: export NPM_CONFIG_SCOPE=""
-      - run: rm .npmrc
-      - run: npm install
-      - run: npm install typescript@'<3.9.0' 
+      - run: yarn install
+      - run: yarn add typescript@'<3.9.0' 
       - run: sed -i 's:@timurxyz/statefuld:statefuld:' src/package.json
-      - run: npm run build:lib
-      - run: npm publish src/dist --access public
+      - run: npm run build:npmjs
+      - run: npm run publish:npmjs
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
