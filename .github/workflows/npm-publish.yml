@@ -20,6 +20,6 @@ jobs:
       - run: npm install
       - run: npm install typescript@'<3.9.0' 
       - run: npm run build:lib
-      - run: npm publish --access public
+      - run: npm publish dist --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
