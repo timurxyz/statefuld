@@ -31,7 +31,7 @@ export interface IStatefuld {
  */
 export function Statefuld(config: StatefuldConfig|Array<string>) {
 
-  return <S extends ConstructorToExtend>(superclass: S) => FnStatefuldMixin(superclass, config);
+  return <SubjectClass extends OverriderCtor>(SubjectClassCtor: SubjectClass) => MixinStatefuld(SubjectClassCtor, config);
   // see the return type defined in the return above
 }
 
@@ -41,23 +41,23 @@ export function Statefuld(config: StatefuldConfig|Array<string>) {
  * Saves the specified (see config) named properties onDestroy and restores those onInit.
  * @param config - a) array of property names to store; b) see StatefuldConfig
  */
-export function StatefuldClass<S extends ConstructorToExtend>(config?: StatefuldConfig|Array<string>) {
+export function StatefuldClass<SubjectClass extends OverriderCtor>(config?: StatefuldConfig|Array<string>) {
 
-  return FnStatefuldMixin( class{}, config);
+  return MixinStatefuld( class{}, config);
 }
 
 
 // tslint:disable-next-line:no-empty-interface
-interface ISuperclassHasOnInit extends OnInit {}
+interface ISubjectClassHasOnInit extends OnInit {}
 // tslint:disable-next-line:no-empty-interface
-interface ISuperclassHasOnDestroy extends OnDestroy {}
-interface ISuperclassHasBoth extends OnInit, OnDestroy {}
-type ConstructorToExtend<T = {}|ISuperclassHasOnInit|ISuperclassHasOnDestroy|ISuperclassHasBoth> = new(...args: any[]) => T;
+interface ISubjectClassHasOnDestroy extends OnDestroy {}
+interface ISubjectClassHasBoth extends OnInit, OnDestroy {}
+type OverriderCtor<T = {}|ISubjectClassHasOnInit|ISubjectClassHasOnDestroy|ISubjectClassHasBoth> = new(...args: any[]) => T;
 
 
 // The embedded interface to the statefuld service, a mixin function, consumed by the decorator and the base class
-function FnStatefuldMixin<S extends ConstructorToExtend>(
-    superclass: S,
+function MixinStatefuld<SubjectClass extends OverriderCtor>(
+    SubjectClassCtor: SubjectClass, // superclass if accessed via the decorator, pseudo-class if accessed via the base class function
     config: StatefuldConfig|Array<string>
   ) {
 
@@ -66,13 +66,13 @@ function FnStatefuldMixin<S extends ConstructorToExtend>(
   const _fnGetSourceInstanceByKey = !(config instanceof Array) && config.fnGetSourceInstanceByKey !== undefined ? config.fnGetSourceInstanceByKey : undefined;
 
   // @ts-ignore
-  return class extends superclass implements IStatefuld {
+  return class extends SubjectClassCtor implements IStatefuld {
 
     constructor(
-      ...args: any[]
+      ...args: any[]  // base class will not pass arguments
     ) {
-      super(...args);
-      statefuld.registerClass<S>( this.constructor.name, _dProps, _keyProp, _fnGetSourceInstanceByKey);
+      super(...args); // will have no effect in case of base class
+      statefuld.registerClass<SubjectClass>( this.constructor.name, _dProps, _keyProp, _fnGetSourceInstanceByKey);
     }
 
     // @Input('statefuld-key')
@@ -83,12 +83,12 @@ function FnStatefuldMixin<S extends ConstructorToExtend>(
 
     // see statefuld.stash in the service
     statefuldStash(): boolean {
-      return statefuld.stash( this as unknown as S);
+      return statefuld.stash( this as unknown as SubjectClass);
     }
 
     // see statefuld.reassign in the service
     statefuldReassign(): boolean {
-      return statefuld.reassign( this as unknown as S);
+      return statefuld.reassign( this as unknown as SubjectClass);
     }
 
     // see statefuld.switch in the service
@@ -99,11 +99,12 @@ function FnStatefuldMixin<S extends ConstructorToExtend>(
     ngOnInit(): void {
 
       if (this.__chkNgLifecycle_iSodZqRKwO !== 0) {
-        console.warn('statefuld: unexpected order of Init/Destroy execution, class:', superclass.name);
+        console.warn('statefuld: unexpected order of Init/Destroy execution, class:', SubjectClassCtor.name);
       }
 
       this.statefuldReassign();
-      if (super.ngOnInit !== undefined) {
+
+      if (super.ngOnInit !== undefined) { // works in case of decorator (in case of base class 'super' has no actual meaning)
         super.ngOnInit();
       }
     }
@@ -113,7 +114,8 @@ function FnStatefuldMixin<S extends ConstructorToExtend>(
       this.__chkNgLifecycle_iSodZqRKwO = 1;
 
       this.statefuldStash();
-      if (super.ngOnDestroy !== undefined) {
+
+      if (super.ngOnDestroy !== undefined) {  // works in case of decorator (in case of base class 'super' has no actual meaning)
         super.ngOnDestroy();
       }
     }
