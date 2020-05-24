@@ -24,6 +24,8 @@ export interface IStatefuld {
   statefuldSwitch( branch?: string): boolean;
 }
 
+enum Whoami { decorator, baseclass }
+
 /**
  * Statefuld class decorator
  * Saves the specified named properties onDestroy and restores those onInit
@@ -31,7 +33,7 @@ export interface IStatefuld {
  */
 export function Statefuld(config: StatefuldConfig|Array<string>) {
 
-  return <SubjectClass extends OverriderCtor>(SubjectClassCtor: SubjectClass) => MixinStatefuld(SubjectClassCtor, config);
+  return <SubjectClass extends OverriderCtor>(SubjectClassCtor: SubjectClass) => MixinStatefuld(SubjectClassCtor, config, Whoami.decorator);
   // see the return type defined in the return above
 }
 
@@ -43,7 +45,7 @@ export function Statefuld(config: StatefuldConfig|Array<string>) {
  */
 export function StatefuldClass<SubjectClass extends OverriderCtor>(config?: StatefuldConfig|Array<string>) {
 
-  return MixinStatefuld( class{}, config);
+  return MixinStatefuld( class{}, config, Whoami.baseclass);
 }
 
 
@@ -58,7 +60,8 @@ type OverriderCtor<T = {}|ISubjectClassHasOnInit|ISubjectClassHasOnDestroy|ISubj
 // The embedded interface to the statefuld service, a mixin function, consumed by the decorator and the base class
 function MixinStatefuld<SubjectClass extends OverriderCtor>(
     SubjectClassCtor: SubjectClass, // superclass if accessed via the decorator, pseudo-class if accessed via the base class function
-    config: StatefuldConfig|Array<string>
+    config: StatefuldConfig|Array<string>,
+    whoami: Whoami
   ) {
 
   const _dProps = config instanceof Array ? config : config.dProps;
