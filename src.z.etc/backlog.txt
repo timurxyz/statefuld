@@ -43,3 +43,9 @@ import 'reflect-metadata';
 // }
 
 // this.__stateCacheId = 'staticId'; // Math.round(Math.random() * 10000000).toString(16);
+
+
+this.constructor.prototype.hasOwnProperty("ngOnDestroy")
+// works in base class but not with decorator
+super.constructor.prototype.hasOwnProperty("ngOnDestroy")
+// works with decorator
