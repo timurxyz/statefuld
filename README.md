@@ -1,6 +1,6 @@
 # statefuld (Stateful dirt daemon)
 
-`statefuld` (stateful dirt daemon, stateful-dee) is a lightweight Angular persistence service 🛄  to make values of data properties of components/classes survive Init/Destroy circles throughout a user session.  
+`statefuld` (stateful dirt daemon, stateful-dee) is a lightweight Angular persistence service 🛄 to make values of data properties of components/classes survive Init/Destroy circles throughout a user session (and also other circles where you reuse components, and for example reset input fields).  
 
 [![GitHub version](https://badge.fury.io/gh/timurxyz%2Fstatefuld.svg)](https://badge.fury.io/gh/timurxyz%2Fstatefuld)
 [![npm version](https://badge.fury.io/js/statefuld.svg)](https://badge.fury.io/js/statefuld)
@@ -67,6 +67,7 @@ To make use of statefuld service you have three alternatives:
 
 * If your only goal is to store/restore the dirt / values on Init/Destroy automatically, then the only thing you do is you assign the decorator to your component. No more efforts needed.
 * You are expected to use the decorator way by default.
+* The decorator generated ngOnInit will fire before the ngOnInit runs in your component, so the reassignment will already take place as you get control at the init hook.
 * This implements/calls `registerClass` properly for you.
 * It stores/restores (stash/reassign) the specified fields in an unattended/automatic manner.
 * You still can do manual calls via the member methods or via the service API.
@@ -81,17 +82,23 @@ export interface HeroCardComponent extends IStatefuld {}
 })
 export class HeroCardComponent implements OnInit, AfterViewInit { ...
 ```
-That is assign the IStatefuld interface to your class component first. And yes, suppress the complaints of the linter.
+That is assign the IStatefuld interface to your class component first. And yes, prease, suppress the complaints of the linter.
 
 ##### 3. Base class
 
 * Many of what the points in the Decorator subsection above apply here. Except:
-* The order of calling the Init and Destroy methods will differ between the decorator and the base class cases. The decorator generated ngOnInit will fire before your ngOnInit runs.
+* The order of execution of the Init and Destroy methods in your component relative to their statefuld counterparts will differ between the decorator and the base class cases.
+* Injecting properties via the constructor arguments in your client component/class will not work.
 * You don't need to bother with the IStatefuld interface, this comes by inheritance.
+
 * You do need to call the super.ngOnInit() and super.ngOnDestroy to activate the implicit reassign and stash calls. See below.
 * In case you control storing/restoring manually then this is your way. Forget the below.
 
 ```ts
+  constructor() {  // note: no injected members
+    super();  // if there is no actual use of constructor this super call is not necessary
+    ...
+  }
   ngOnInit() {  // if unattended restore (re-assignment) of the dirt is needed 
   super.ngOnInit();
   ...
@@ -271,6 +278,8 @@ import {Statefuld, IStatefuld, statefuld} from 'statefuld';
 ### Roadmap
 
 * Implementing the Directive variant
+* Two-level id
+* Notifying the client class that dirt effectively existed and was reassigned.
 
 ### References
 
