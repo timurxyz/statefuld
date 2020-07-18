@@ -1,4 +1,4 @@
-
+https://stackoverflow.com/a/41403157
 
 // #Property decorator
 export function StatefuldProp( target: any, propertyKey: string): void {
@@ -49,3 +49,100 @@ this.constructor.prototype.hasOwnProperty("ngOnDestroy")
 // works in base class but not with decorator
 super.constructor.prototype.hasOwnProperty("ngOnDestroy")
 // works with decorator
+super.ngOnInit !== undefined
+// same thing in decorator
+
+console.warn("super name", this.constructor.name);
+// works in both, baseclass and decorator
+
+
+https://dev.to/angular/decorators-do-not-work-as-you-might-expect-3gmj
+https://stackoverflow.com/questions/29879267/es6-class-multiple-inheritance
+https://www.bryntum.com/blog/the-mixin-pattern-in-typescript-all-you-need-to-know/
+
+import {OnDestroy, OnInit} from '@angular/core';
+import {Subject} from 'rxjs';
+
+
+// Extendable class version
+export function BaseBehaviorsClass<SubjectClass extends OverriderCtor>() {
+
+  return class extends Functionality(class{}) {};
+}
+
+// Alternative alias of the above
+export {BaseBehaviorsClass as BaseComponent};
+
+// Decorator helper interface
+export interface IBaseSubscriptionCollector {
+  ngUnsubscribe: Subject<void>;
+}
+
+
+interface IConstructor<T> { new(...param: any[]): T; prototype: {} }
+type Constructable<SC> = new(...param: any[]) => SC;
+
+// tslint:disable-next-line:no-empty-interface
+interface IHasInit extends OnInit {}
+// tslint:disable-next-line:no-empty-interface
+interface IHasDestroy extends OnDestroy {}
+interface IHasInitAndDestroy extends OnInit, OnDestroy {}
+type OverriderCtor = Constructable<{}|IHasInit|IHasDestroy|IHasInitAndDestroy>;
+
+export const ClassDecorator = <C extends IConstructor<IBaseSubscriptionCollector>>() => {
+  return (ctor: C ) => {
+    return class extends ctor { };
+  }
+}
+
+// Decorator version
+export const BaseBehaviors = <SubjectClass extends Constructable<IBaseSubscriptionCollector>>() => {
+
+  return (SubjectClassCtor: SubjectClass) => {
+
+    // required in order to reshape the ctor chain to use the SubjectClassCtor params
+    const ParamPassthru = (CS): { new(...param: any[]): {}; prototype: {} } => class extends CS {
+      constructor(...param: any[]) {
+        super(...param);
+        console.warn('ctor BB:ParamPassthru');
+      }
+    };
+
+    return class extends ParamPassthru(Functionality(SubjectClassCtor)) {
+
+      constructor(
+        ...param: any[]
+      ) {
+        super(...param);
+        console.warn('ctor BB:Mixin');
+      }
+
+      // If this round of the ctors chain had an ngOnInit or other ng hookery, then injection worked wo the above explicit ctor
+    };
+}}
+
+const Functionality = (SC) => class extends SC implements IBaseSubscriptionCollector, OnInit, OnDestroy {
+
+  ngUnsubscribe = new Subject<void>();
+
+  ngOnInit(): void {
+
+    console.warn('init BB:Unsubscribe');
+
+    if (super.ngOnInit !== undefined) {
+      console.warn('init BB:Unsubscribe super called');
+      super.ngOnInit();
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (super.ngOnDestroy !== undefined) {
+      console.warn('destroy BB:Unsubscribe super called');
+      super.ngOnDestroy();
+    }
+
+    console.warn('destroy BB:Unsubscribe');
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+};

@@ -88,9 +88,8 @@ That is assign the IStatefuld interface to your class component first. And yes, 
 
 * Many of what the points in the Decorator subsection above apply here. Except:
 * The order of execution of the Init and Destroy methods in your component relative to their statefuld counterparts will differ between the decorator and the base class cases.
-* Injecting properties via the constructor arguments in your client component/class will not work.
+* Injecting properties via the constructor arguments in your client component/class will not work, it won't even compile (so declaring as normal members or injecting via a module will work)
 * You don't need to bother with the IStatefuld interface, this comes by inheritance.
-
 * You do need to call the super.ngOnInit() and super.ngOnDestroy to activate the implicit reassign and stash calls. See below.
 * In case you control storing/restoring manually then this is your way. Forget the below.
 

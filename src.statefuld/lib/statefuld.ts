@@ -54,7 +54,7 @@ interface ISubjectClassHasOnInit extends OnInit {}
 // tslint:disable-next-line:no-empty-interface
 interface ISubjectClassHasOnDestroy extends OnDestroy {}
 interface ISubjectClassHasBoth extends OnInit, OnDestroy {}
-type OverriderCtor<T = {}|ISubjectClassHasOnInit|ISubjectClassHasOnDestroy|ISubjectClassHasBoth> = new(...args: any[]) => T;
+type OverriderCtor<SC = {}|ISubjectClassHasOnInit|ISubjectClassHasOnDestroy|ISubjectClassHasBoth> = new(...param: any[]) => SC;
 
 
 // The embedded interface to the statefuld service, a mixin function, consumed by the decorator and the base class
@@ -72,9 +72,9 @@ function MixinStatefuld<SubjectClass extends OverriderCtor>(
   return class extends SubjectClassCtor implements IStatefuld {
 
     constructor(
-      ...args: any[]  // base class will not pass arguments
+      ...param: any[]  // base class will not pass arguments
     ) {
-      super(...args); // will have no effect in case of base class
+      super(...param); // will have no effect in case of base class
       statefuld.registerClass<SubjectClass>( this.constructor.name, _dProps, _keyProp, _fnGetSourceInstanceByKey);
     }
 
